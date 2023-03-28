@@ -1,0 +1,35 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Add CSS and JS to Thymeleaf</title>
+    <link th:href="@{/css/static.css}" rel="stylesheet" />
+<!--     <script type="text/javascript" th:src="@{/js/actions.js}"></script> -->
+    
+</head>
+<div th:switch="${pessoas}">
+    <h2 th:case="null">Não há pessoas cadastradas!</h2>
+        <div th:case="*">
+            <h2>Pessoas</h2>
+            <table>
+                <thead class="table-header">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Gênero</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pessoa : ${pessoas}">
+                    <td th:text="${pessoa.nome}"></td>
+                    <td th:text="${pessoa.email}"></td>
+                    <td th:text="${pessoa.genero}"></td>
+                    <td><a th:href="@{/edit/{id}(id=${pessoa.cod})}" class="button-blue" >Edit</a></td>
+                    <td><a th:href="@{/delete/{id}(id=${pessoa.cod})}" class="button-red" >Delete</a></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+    <p><a href="/signup">Add a new Pessoa</a></p>
+</div>

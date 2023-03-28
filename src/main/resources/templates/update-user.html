@@ -1,0 +1,32 @@
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/static.css}" rel="stylesheet" />
+</head>
+<form action="#" th:action="@{/update/{id}(id=${pessoa.cod})}"
+	th:object="${pessoa}" method="post">
+	
+	<p>
+		<label for="nome">Nome</label> <input type="text" th:field="*{nome}"
+			id="nome" placeholder="Nome"> <span
+			th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span> 
+	<p/>
+	
+	<p>	
+		<label
+			for="email">Email</label> <input type="text" th:field="*{email}"
+			id="email" placeholder="Email"> <span
+			th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span> 
+	<p/>	
+	
+	<p>
+		<label for="genero">Gênero</label> 
+			<select class="form-control" id="genero" name="genero" th:field="*{genero}">
+				<option
+					th:each="genero : ${T(com.example.api.model.Genero).values()}"
+					th:value="${genero}" th:text="${genero}">
+				</option>
+		</select> 
+	<p/>
+	<input
+		type="submit" value="Update Pessoa" class="button-green">
+</form>
