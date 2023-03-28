@@ -1,4 +1,4 @@
-package com.example.api.cntroller;
+package com.example.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
