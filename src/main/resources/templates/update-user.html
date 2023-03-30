@@ -1,32 +1,48 @@
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/static.css}" rel="stylesheet" />
+     <link rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous">
 </head>
-<form action="#" th:action="@{/update/{id}(id=${pessoa.cod})}"
-	th:object="${pessoa}" method="post">
-	
-	<p>
-		<label for="nome">Nome</label> <input type="text" th:field="*{nome}"
-			id="nome" placeholder="Nome"> <span
-			th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span> 
-	<p/>
-	
-	<p>	
-		<label
-			for="email">Email</label> <input type="text" th:field="*{email}"
-			id="email" placeholder="Email"> <span
-			th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span> 
-	<p/>	
-	
-	<p>
-		<label for="genero">Gênero</label> 
-			<select class="form-control" id="genero" name="genero" th:field="*{genero}">
-				<option
-					th:each="genero : ${T(com.example.api.model.Genero).values()}"
-					th:value="${genero}" th:text="${genero}">
-				</option>
-		</select> 
-	<p/>
-	<input
-		type="submit" value="Update Pessoa" class="button-green">
-</form>
+
+<div class="col-md-8 order-md-1">
+	<form action="#" th:action="@{/update/{id}(id=${pessoa.cod})}"
+		th:object="${pessoa}" method="post">
+		
+		<div class="form-group">
+				<label for="name" >Nome</label> 
+					<input type="text" th:field="*{nome}" class="form-control"
+			 			id="nome" placeholder="Nome" required> 
+			 			<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+			 	<div class="invalid-feedback">
+	                  Valid name is required.
+	            </div>
+			</div>
+			
+			<div class="form-group">
+				<label for="email" >Email</label> 
+					<input type="email" th:field="*{email}" class="form-control"
+			 			id="email" placeholder="name@example.com" required> 
+			 			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+			</div>
+			
+			<div class="form-group">
+				<label for="genero">Gênero</label> 
+					<select id="genero" name="genero" th:field="*{genero}" class="custom-select d-block w-100" required>
+						<option value="">Selecione...</option>
+						<option
+							th:each="genero : ${T(com.example.api.model.Genero).values()}"
+							th:value="${genero}" th:text="${genero}">
+						</option>
+					</select> 
+			</div>
+			
+			<nav class="navbar navbar-light bg-light">
+			  <form class="form-inline">
+			    <button type="submit" class="btn btn-primary btn-lg active" aria-pressed="true">Salvar</button>
+			    <a href="/index" class="btn btn-secondary btn-lg active" aria-pressed="true">Voltar</a>
+			  </form>
+			</nav>		
+	</form>
+</div>	
