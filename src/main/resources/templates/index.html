@@ -19,8 +19,11 @@
 		    <h2 th:case="null">Não há pessoas cadastradas!</h2>
 		        <div th:case="*" class="container-fluid" >
 	            	<table class = "table table-striped">
-	            		<p><a href="/signup">Adicionar</a></p>
-	     				<thead class="thead-dark">
+					<nav class="navbar navbar-light bg-light">
+						<a href="/signup" class="btn btn-outline-primary">Adicionar</a> 
+						<a href="/pdf" class="btn btn-outline-secondary"  target="_blank">Gerar Relatório</a> 
+					</nav>
+					<thead class="thead-dark">
 	                    <tr>
 	                        <th>Name</th>
 	                        <th>Email</th>

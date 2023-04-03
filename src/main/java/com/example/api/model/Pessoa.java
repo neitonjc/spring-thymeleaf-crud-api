@@ -31,6 +31,17 @@ public class Pessoa {
 	
 	@Enumerated(EnumType.STRING)
 	private Genero genero;
+	
+	
+
+	public Pessoa(Integer cod, @NotBlank(message = "Name is mandatory") String nome,
+			@Email @NotBlank(message = "Email is mandatory") String email, Genero genero) {
+		super();
+		this.cod = cod;
+		this.nome = nome;
+		this.email = email;
+		this.genero = genero;
+	}
 
 	public Pessoa() {
 		super();

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        h1{
+            color: brown;
+        }
+        .quotation {
+            width: 100%;
+        }
+        .quotation, .quotation th, .quotation td {
+            border: 1px solid brown;
+            border-collapse: collapse;
+        }
+        .quotation th {
+            background-color: brown;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Quotation</h1>
+<table>
+    <tr>
+        <th>Pessoa</th>
+    </tr>
+    <tr>
+        <td th:text="'Company Name: ' + ${customer.cod}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Contact Name: ' + ${customer.nome}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Email: ' + ${customer.email}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Genero: ' + ${customer.genero}"></td>
+    </tr>
+</table>
+<br />
+</body>
+</html>

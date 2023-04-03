@@ -1,6 +1,15 @@
 package com.example.api.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.api.model.Pessoa;
 import com.example.api.repository.PessoaRepository;
+import com.example.api.services.PdfGenerateService;
 
 import jakarta.validation.Valid;
 
@@ -18,6 +28,9 @@ public class PessoaController {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	
+	@Autowired
+    private PdfGenerateService pdfGenerateService;
 
 	@GetMapping("/index")
 	public String showUserList(Model model) {
@@ -76,6 +89,21 @@ public class PessoaController {
 		pessoaRepository.delete(pessoa);
 
 		return "redirect:/index";
+	}
+	
+	@GetMapping(value = "/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> pessoasReport() throws IOException {
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+		pessoas = (List<Pessoa>) pessoaRepository.findAll();
+
+		ByteArrayInputStream bis = pdfGenerateService.peoplePDFReport(pessoas);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "inline; filename=pessoas.pdf");
+
+		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+				.body(new InputStreamResource(bis));
+
 	}
 
 }
