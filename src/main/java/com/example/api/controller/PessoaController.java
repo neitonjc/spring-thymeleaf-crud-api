@@ -93,8 +93,7 @@ public class PessoaController {
 	
 	@GetMapping(value = "/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> pessoasReport() throws IOException {
-		List<Pessoa> pessoas = new ArrayList<Pessoa>();
-		pessoas = (List<Pessoa>) pessoaRepository.findAll();
+		List<Pessoa> pessoas = (List<Pessoa>) pessoaRepository.findAll();
 
 		ByteArrayInputStream bis = pdfGenerateService.peoplePDFReport(pessoas);
 
